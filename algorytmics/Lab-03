@@ -1,0 +1,416 @@
+public class CezarCipher {
+
+    public static void main(String[] args) {
+
+        String plaintext = "ATTACK AT DAWN";
+
+        int shift = 3;
+
+        String ciphertext = encrypt(plaintext, shift);
+
+        System.out.println("Ciphertext: " + ciphertext);
+
+        String decryptedtext = decrypt(ciphertext, shift);
+
+        System.out.println("Decrypted text: " + decryptedtext);
+
+    }
+
+    public static String encrypt(String plaintext, int shift) {
+
+        StringBuilder ciphertext = new StringBuilder();
+
+        for (int i = 0; i < plaintext.length(); i++) {
+
+            char currentChar = plaintext.charAt(i);
+
+            // Shift uppercase letters
+
+            if (Character.isUpperCase(currentChar)) {
+
+                char shiftedChar = (char) ((currentChar + shift - 65) % 26 + 65);
+
+                ciphertext.append(shiftedChar);
+
+            }
+
+            // Shift lowercase letters
+
+            else if (Character.isLowerCase(currentChar)) {
+
+                char shiftedChar = (char) ((currentChar + shift - 97) % 26 + 97);
+
+                ciphertext.append(shiftedChar);
+
+            }
+
+            // Keep non-letter characters
+
+            else {
+
+                ciphertext.append(currentChar);
+
+            }
+
+        }
+
+No
+
+        return ciphertext.toString();
+
+    }
+
+    public static String decrypt(String ciphertext, int shift) {
+
+        StringBuilder decryptedtext = new StringBuilder();
+
+        for (int i = 0; i < ciphertext.length(); i++) {
+
+            char currentChar = ciphertext.charAt(i);
+
+            // Shift uppercase letters
+
+            if (Character.isUpperCase(currentChar)) {
+
+                char shiftedChar = (char) ((currentChar - shift - 65 + 26) % 26 + 65);
+
+                decryptedtext.append(shiftedChar);
+
+            }
+
+            // Shift lowercase letters
+
+            else if (Character.isLowerCase(currentChar)) {
+
+                char shiftedChar = (char) ((currentChar - shift - 97 + 26) % 26 + 97);
+
+                decryptedtext.append(shiftedChar);
+
+            }
+
+            // Keep non-letter characters
+
+            else {
+
+                decryptedtext.append(currentChar);
+
+            }
+
+        }
+
+        return decryptedtext.toString();
+
+    }
+
+}
+
+def encrypt(plaintext, shift):
+
+    ciphertext = ""
+
+    for char in plaintext:
+
+        # Shift uppercase letters
+
+        if char.isupper():
+
+            shifted_char = chr((ord(char) + shift - 65) % 26 + 65)
+
+            ciphertext += shifted_char
+
+        # Shift lowercase letters
+
+        elif char.islower():
+
+            shifted_char = chr((ord(char) + shift - 97) % 26 + 97)
+
+            ciphertext += shifted_char
+
+        # Keep non-letter characters
+
+        else:
+
+            ciphertext += char
+
+    return ciphertext
+
+def decrypt(ciphertext, shift):
+
+    decryptedtext = ""
+
+    for char in ciphertext:
+
+        # Shift uppercase letters
+
+        if char.isupper():
+
+            shifted_char = chr((ord(char) - shift - 65 + 26) % 26 + 65)
+
+            decryptedtext += shifted_char
+
+        # Shift lowercase letters
+
+        elif char.islower():
+
+            shifted_char = chr((ord(char) - shift - 97 + 26) % 26 + 97)
+
+            decryptedtext += shifted_char
+
+        # Keep non-letter characters
+
+        else:
+
+            decryptedtext += char
+
+    return decryptedtext
+
+# Example usage
+
+plaintext = "ATTACK AT DAWN"
+
+shift = 3
+
+ciphertext = encrypt(plaintext, shift)
+
+print("Ciphertext: " + ciphertext)
+
+decryptedtext = decrypt(ciphertext, shift)
+
+print("Decrypted text: " + decryptedtext)
+
+def encrypt(plaintext, key):
+
+    # Convert key to a list of integers representing the order of letters
+
+    key_order = [ord(char) - 65 for char in key.upper()]
+
+    
+
+    # Pad the plaintext with spaces to make its length a multiple of the key length
+
+    plaintext += " " * (len(key_order) - len(plaintext) % len(key_order))
+
+    
+
+    # Split the plaintext into blocks of length key length
+
+    plaintext_blocks = [plaintext[i:i+len(key_order)] for i in range(0, len(plaintext), len(key_order))]
+
+    
+
+    # Transpose the plaintext blocks according to the key order
+
+    transposed_blocks = ["".join([block[i] for i in key_order]) for block in plaintext_blocks]
+
+    
+
+    # Join the transposed blocks into a single ciphertext
+
+    ciphertext = "".join(transposed_blocks)
+
+    
+
+    return ciphertext
+
+def decrypt(ciphertext, key):
+
+    # Convert key to a list of integers representing the order of letters
+
+    key_order = [ord(char) - 65 for char in key.upper()]
+
+    
+
+    # Split the ciphertext into blocks of length key length
+
+    ciphertext_blocks = [ciphertext[i:i+len(key_order)] for i in range(0, len(ciphertext), len(key_order))]
+
+    
+
+    # Transpose the ciphertext blocks according to the inverse of the key order
+
+    inverse_key_order = [key_order.index(i) for i in range(len(key_order))]
+
+    transposed_blocks = ["".join([block[i] for i in inverse_key_order]) for block in ciphertext_blocks]
+
+    
+
+    # Join the transposed blocks into a single plaintext
+
+    plaintext = "".join(transposed_blocks)
+
+    
+
+    return plaintext.strip()
+
+# Example usage
+
+plaintext = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"
+
+key = "PIES"
+
+ciphertext = encrypt(plaintext, key)
+
+print("Ciphertext: " + ciphertext)
+
+decryptedtext = decrypt(ciphertext, key)
+
+print("Decrypted text: " + decryptedtext)
+
+public class PermutationCipher {
+
+    
+
+    public static String encrypt(String plaintext, String key) {
+
+        // Convert key to a list of integers representing the order of letters
+
+        int[] keyOrder = getKeyOrder(key);
+
+        
+
+        // Pad the plaintext with spaces to make its length a multiple of the key length
+
+        plaintext += " ".repeat(keyOrder.length - plaintext.length() % keyOrder.length());
+
+        
+
+        // Split the plaintext into blocks of length key length
+
+        String[] plaintextBlocks = plaintext.split("(?<=\\G.{" + keyOrder.length + "})");
+
+        
+
+        // Transpose the plaintext blocks according to the key order
+
+        String[] transposedBlocks = new String[plaintextBlocks.length];
+
+        for (int i = 0; i < plaintextBlocks.length; i++) {
+
+            StringBuilder transposedBlock = new StringBuilder();
+
+            for (int j : keyOrder) {
+
+                transposedBlock.append(plaintextBlocks[i].charAt(j));
+
+            }
+
+            transposedBlocks[i] = transposedBlock.toString();
+
+        }
+
+        
+
+        // Join the transposed blocks into a single ciphertext
+
+        String ciphertext = String.join("", transposedBlocks);
+
+        
+
+        return ciphertext;
+
+    }
+
+    
+
+    public static String decrypt(String ciphertext, String key) {
+
+        // Convert key to a list of integers representing the order of letters
+
+        int[] keyOrder = getKeyOrder(key);
+
+        
+
+        // Split the ciphertext into blocks of length key length
+
+        String[] ciphertextBlocks = ciphertext.split("(?<=\\G.{" + keyOrder.length + "})");
+
+        
+
+        // Transpose the ciphertext blocks according to the inverse of the key order
+
+        int[] inverseKeyOrder = getInverseKeyOrder(keyOrder);
+
+        String[] transposedBlocks = new String[ciphertextBlocks.length];
+
+        for (int i = 0; i < ciphertextBlocks.length; i++) {
+
+            StringBuilder transposedBlock = new StringBuilder();
+
+            for (int j : inverseKeyOrder) {
+
+                transposedBlock.append(ciphertextBlocks[i].charAt(j));
+
+            }
+
+            transposedBlocks[i] = transposedBlock.toString();
+
+        }
+
+        
+
+        // Join the transposed blocks into a single plaintext
+
+        String plaintext = String.join("", transposedBlocks).trim();
+
+        
+
+        return plaintext;
+
+    }
+
+    
+
+    private static int[] getKeyOrder(String key) {
+
+        int[] keyOrder = new int[key.length()];
+
+        for (int i = 0; i < key.length(); i++) {
+
+            keyOrder[i] = Character.toUpperCase(key.charAt(i)) - 65;
+
+        }
+
+        return keyOrder;
+
+    }
+
+    
+
+    private static int[] getInverseKeyOrder(int[] keyOrder) {
+
+        int[] inverseKeyOrder = new int[keyOrder.length];
+
+        for (int i = 0; i < keyOrder.length; i++) {
+
+            inverseKeyOrder[keyOrder[i]] = i;
+
+        }
+
+        return inverseKeyOrder;
+
+    }
+
+    
+
+    public static void main(String[] args) {
+
+        String plaintext = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
+
+        String key = "PIES";
+
+        
+
+        String ciphertext = encrypt(plaintext, key);
+
+        System.out.println("Ciphertext: " + ciphertext);
+
+        
+
+        String decryptedtext = decrypt(ciphertext, key);
+
+        System.out.println("Decrypted text: " + decryptedtext);
+
+    }
+
+}
+
