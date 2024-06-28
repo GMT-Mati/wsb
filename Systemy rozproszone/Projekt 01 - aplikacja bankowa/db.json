@@ -1,0 +1,10 @@
+[
+    {
+        "imie": "Jan",
+        "nazwisko": "Kowalski",
+        "pesel": "12345678901",
+        "nr_konta": "00000001",
+        "saldo": 1000.0
+    },
+    ...
+]

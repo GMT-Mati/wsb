@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Narzędzia do automatyzacji budowy oprogramowania" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Narzędzia do automatyzacji budowy oprogramowania/2023_L_I_NWh_INF_K3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Programowanie i architektura aplikacji w chmurze/iac-terraform-azure" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Programowanie i architektura aplikacji w chmurze/test-terraform-workflow" vcs="Git" />
+  </component>
+</project>
