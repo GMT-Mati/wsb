@@ -9,8 +9,10 @@ class ClientTerminal:
         self.client_socket.connect((self.host, self.port))
 
     def send_request(self, request):
+        print(f"Wysyłanie żądania: {request}")  # Debugowanie
         self.client_socket.send(json.dumps(request).encode('utf-8'))
         response = self.client_socket.recv(1024).decode('utf-8')
+        print(f"Otrzymano odpowiedź: {response}")  # Debugowanie
         return json.loads(response)
 
     def check_balance(self, nr_konta):
@@ -51,8 +53,8 @@ class ClientTerminal:
 
 if __name__ == "__main__":
     client = ClientTerminal()
-    # Przykłady użycia
+    # Przykłady wywołania funkcji terminala klienta
     client.check_balance("00000001")
-    client.deposit("00000001", 500)
-    client.withdraw("00000001", 200)
+    client.deposit("00000001", 200)
+    client.withdraw("00000001", 50)
     client.transfer("00000001", "00000002", 100)
